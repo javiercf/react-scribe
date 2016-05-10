@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import Scribe from 'scribe-editor'
 import Toolbar from 'scribe-plugin-toolbar'
 import BlockQuoteCmd from 'scribe-plugin-blockquote-command'
@@ -81,6 +82,14 @@ class ScribeEditor extends React.Component {
   constructor(props) {
     super(props);
     this.commands = this.commands.bind(this);
+    this.isControlled = this.isControlled.bind(this);
+    this.state = {
+      value: this.isControlled() ? this.props.value : this.props.defaultValue
+    }
+  }
+
+  isControlled() {
+    return 'value' in this.props;
   }
 
   // generate commands has based on config prop
@@ -93,10 +102,15 @@ class ScribeEditor extends React.Component {
     return commands;
   }
 
+  updateContent(value) {
+    this.setState({ value: value });
+  }
+
   // Bind scribe to Component and include Toolbar commands and options
   componentDidMount() {
-    const scribe = new Scribe(document.querySelector('.sc-editor'));
-    const toolbarElement = document.querySelector('.sc-toolbar');
+    const editor = ReactDOM.findDOMNode(this.refs.editor);
+    const scribe = new Scribe(editor);
+    const toolbarElement = ReactDOM.findDOMNode(this.refs.toolbar);
     for (var i in this.commands()) {
       scribe.use(this.commands()[i]);
     }
@@ -104,20 +118,21 @@ class ScribeEditor extends React.Component {
     scribe.use(KeyBoardCmd());
     scribe.use(InlineStylesCmd());
     scribe.use(Toolbar(toolbarElement));
+    scribe.setContent(this.state.value);
   }
 
   render() {
     return (
       <div>
-        <ScribeToolbar config={this.commands()} />
-        <div className='sc-editor' />
+        <ScribeToolbar config={this.commands()} ref='toolbar' />
+        <div className='sc-editor' ref='editor' onChange={this.props.onChange} />
       </div>
     )
   }
 }
 
 ScribeEditor.defaultProps = {
-  config: defaultOptions
+  config: defaultOptions,
 };
 
 export default ScribeEditor

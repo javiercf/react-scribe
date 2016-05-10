@@ -2,13 +2,18 @@ import React from 'react'
 import { render } from 'react-dom'
 import ScribeEditor from '../src/main'
 
-class DemoApp extends React.Component {
-  render() {
+const DemoApp = React.createClass({
+  handleChange: function(e) {
+    console.log('whhhhh');
+    console.log(e.target);
+  },
+
+  render: function() {
     return (
-      <ScribeEditor />
-      )
+      <ScribeEditor defaultValue='hellooooo' onChange={this.handleChange} />
+    )
   }
-}
+});
 
 render(
   <DemoApp />,
