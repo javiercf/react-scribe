@@ -1,19 +1,16 @@
 var path = require('path');
+var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: __dirname + '/src/index.html',
+  template: __dirname + '/example/index.html',
   filename: 'index.html',
   inject: 'body'
 });
 
 module.exports = {
   entry: [
-    './src/main.js',
+    './example/main.js',
   ],
-  output: {
-    filename: 'lib/main.js',
-    path: __dirname + '/dist',
-  },
   module: {
     loaders: [
       {
@@ -27,5 +24,7 @@ module.exports = {
       }
     ]
   },
-  plugins: [HtmlWebpackPluginConfig]
+  plugins: [
+    HtmlWebpackPluginConfig,
+  ]
 };

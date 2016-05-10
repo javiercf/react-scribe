@@ -2,7 +2,7 @@
   "name": "react-scribe",
   "version": "0.1.0",
   "description": "The Guardian's scribe.js react component",
-  "main": "index.js",
+  "main": "src/main.js",
   "dependencies": {
     "react": "^15.0.2",
     "react-dom": "^15.0.2",
@@ -36,11 +36,16 @@
   },
   "scripts": {
     "test": "/tests/*.js",
-    "dev": "webpack-dev-server -w --inline"
+    "dev": "webpack-dev-server -w --inline",
+    "build": "webpack -p --config webpack.build.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/javiercf/react-scribe.git"
+  },
+  "bugs": {
+    "url": "https://github.com/javiercf/react-scribe/issues",
+    "email": "javiercferrans@gmail.com"
   },
   "keywords": [
     "react",
