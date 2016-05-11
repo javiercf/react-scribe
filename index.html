@@ -2,7 +2,9 @@
 <html>
 <head>
   <title>React Scribe Editor</title>
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="lib/react-scribe.min.css" />
 
   <style>
   *{
@@ -38,11 +40,58 @@
     background: #fafafa;
   }
   </style>
+  <script src="https://fb.me/react-15.0.2.js"></script>
+  <script src="https://fb.me/react-dom-15.0.2.js"></script>
 </head>
 <body>
 <div id="main"></div>
-<script src="https://fb.me/react-15.0.2.min.js"></script>
-<script src="https://fb.me/react-dom-15.0.2.min.js"></script>
-<script src="dist/react-scribe-editor.min.js"></script>
+<script src="lib/react-scribe-editor.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+<script type="text/babel">
+const Editor = ScribeEditor.default;
+
+const ShowCase = props => {
+  return (
+    <div className='sc-showCase'>
+      { props.demoContent }
+    </div>
+    )
+};
+
+const myOptions = {
+  'commands': ['h2', 'blockquote', 'code', 'ol', 'ul', 'indent', 'unindent', 'linkPrompt',
+    'unlink']
+};
+
+
+class DemoApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: 'hello world'
+    }
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(value) {
+    this.setState({ text: value });
+  }
+
+  render() {
+    return (
+      <div>
+        <Editor defaultValue='hello world' config={myOptions} onChange={this.handleChange} />
+        <ShowCase demoContent={this.state.text} />
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(
+  <DemoApp />,
+  document.getElementById('main')
+);
+</script>
 </body>
 </html>
