@@ -4,7 +4,7 @@ import ScribeEditor from '../src/main'
 
 const ShowCase = props => {
   return (
-    <div>
+    <div className='sc-showCase'>
       { props.demoContent }
     </div>
     )

@@ -10,6 +10,7 @@ var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 module.exports = {
   entry: [
     './example/main.js',
+    './src/react-scribe.scss',
   ],
   module: {
     loaders: [
@@ -23,6 +24,9 @@ module.exports = {
         loaders: ['style', 'css', 'sass']
       }
     ]
+  },
+  sassLoader: {
+    includePaths: [__dirname, './src/']
   },
   plugins: [
     HtmlWebpackPluginConfig,

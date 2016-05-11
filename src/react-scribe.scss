@@ -1,0 +1,39 @@
+.sc-container {
+  border: 1px solid #eee;
+  box-shadow: 1px 1px 3px #ccc;
+
+  .sc-editor {
+    min-height: 100%;
+    padding: 1em;
+
+    &:focus {
+      outline: none;
+      box-shadow: inset -1px -1px 5px #ccc;
+    }
+  }
+  .sc-toolbar {
+    background: #eee;
+    box-shadow: 1px 1px 3px #ccc;
+
+    button {
+      border: none;
+      background: none;
+      padding: .5em;
+      font-size: 1em;
+      color: #666;
+
+      & + button {
+        border-left: 1px solid #ddd;
+      }
+
+      i {
+        display: block;
+      }
+
+      &[disabled] {
+        color: #ccc;
+      }
+
+    }
+  }
+}

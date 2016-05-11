@@ -2,50 +2,17 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Scribe from 'scribe-editor'
 import Toolbar from 'scribe-plugin-toolbar'
-import BlockQuoteCmd from 'scribe-plugin-blockquote-command'
-import CodeCmd from 'scribe-plugin-code-command'
-import CurlyQuotesCmd from 'scribe-plugin-curly-quotes'
-import FormatterCmd from 'scribe-plugin-formatter-html-ensure-semantic-elements'
-import PlainTextCmd from 'scribe-plugin-formatter-plain-text-convert-new-lines-to-html'
-import HeadingCmd from 'scribe-plugin-heading-command'
-import InlineStylesCmd from 'scribe-plugin-inline-styles-to-elements'
-import UnlinkCmd from 'scribe-plugin-intelligent-unlink-command'
-import KeyBoardCmd from 'scribe-plugin-keyboard-shortcuts'
-import LinkPromptCmd from 'scribe-plugin-link-prompt-command'
-import SanitizerCmd from 'scribe-plugin-sanitizer'
-import SmartListsCmd from 'scribe-plugin-smart-lists'
 import _ from 'lodash'
-
-
-/**
- * Hashmap of commands
- */
-
-const optionMap = {
-  'blockquote': BlockQuoteCmd(),
-  'code': CodeCmd(),
-  'h1': HeadingCmd(1),
-  'h2': HeadingCmd(2),
-  'h3': HeadingCmd(3),
-  'h4': HeadingCmd(4),
-  'h5': HeadingCmd(5),
-  'linkPrompt': LinkPromptCmd(),
-  'unlink': UnlinkCmd(),
-  'insertOrderedList': SmartListsCmd(),
-  'insertUnOrderedList': SmartListsCmd(),
-  'removeFormat': FormatterCmd()
-};
+import optionMap from './optionMap'
 
 /**
  * Default Options
  * commands: array of desired toolbar commands
- * TODO: options: array of aditional options i.e. (formatting, keyboard, etc..)
  */
 
 const defaultOptions = {
  'commands': ['blockquote', 'code', 'h1', 'h2', 'h3', 'h4', 'h5', 'linkPrompt',
-    'unlink', 'insertOrderedList', 'insertUnOrderedList', 'removeFormat'],
-  'options': ''
+    'unlink', 'ol', 'ul']
 };
 
 /**
@@ -58,17 +25,31 @@ class ScribeToolbar extends React.Component {
 
     let toolBarOptions = [];
     for (var i in this.props.config) {
-      toolBarOptions.push(<button key={i} data-command-name={i}>{i}</button>);
+      toolBarOptions.push(
+        <button key={i} data-command-name={this.props.config[i]['command']}>
+          <i className={'fa ' + this.props.config[i]['display']} />
+        </button>
+      );
     }
 
     return (
       <div className='sc-toolbar'>
+          <button data-command-name='bold'>
+            <i className='fa fa-bold' />
+          </button>
+          <button data-command-name='italic'>
+            <i className='fa fa-italic' />
+          </button>
+          <button data-command-name='underline'>
+            <i className='fa fa-underline' />
+          </button>
           {toolBarOptions}
-          <button data-command-name="indent">Indent</button>
-          <button data-command-name="outdent">Outdent</button>
-          <button data-command-name='undo'>Undo</button>
-          <button data-command-name='redo'>Redo</button>
-          <button data-command-name='cleanup'>Clean</button>
+          <button data-command-name='undo'>
+            <i className='fa fa-undo' />
+          </button>
+          <button data-command-name='redo'>
+            <i className='fa fa-repeat' />
+          </button>
       </div>
     )
   }
@@ -82,6 +63,7 @@ class ScribeEditor extends React.Component {
   constructor(props) {
     super(props);
     this.commands = this.commands.bind(this);
+    this.parseConfig = this.parseConfig.bind(this);
     this.isControlled = this.isControlled.bind(this);
     this.updateContent = this.updateContent.bind(this);
 
@@ -95,13 +77,35 @@ class ScribeEditor extends React.Component {
   }
 
   // generate commands has based on config prop
-
   commands() {
     let commands = {};
     this.props.config.commands.forEach( cmd => {
       commands[cmd] = _.get(optionMap, cmd)
     });
     return commands;
+  }
+
+  parseConfig() {
+    let config = this.props.config;
+    let newConfig = {
+      'toolbarElements': {},
+      'plugins': []
+    };
+    config.commands.forEach( cmd => {
+      let command = _.get(optionMap, cmd);
+      if (command) {
+        if (command.hasOwnProperty('action')) {
+          newConfig.plugins.push(command.action);
+        }
+        newConfig['toolbarElements'][cmd] = command;
+      } else if (cmd.hasOwnProperty('action') &&
+          cmd.hasOwnProperty('display')) {
+        newConfig.plugins.push(cmd.action);
+        newConfig.toolbarElements[cmd.command] = cmd;
+      }
+    });
+    console.log(newConfig);
+    return newConfig;
   }
 
   updateContent(value) {
@@ -113,13 +117,11 @@ class ScribeEditor extends React.Component {
     const editor = ReactDOM.findDOMNode(this.refs.editor);
     const scribe = new Scribe(editor);
     const toolbarElement = ReactDOM.findDOMNode(this.refs.toolbar);
-    for (var i in this.commands()) {
-      scribe.use(this.commands()[i]);
+    for (var i in this.parseConfig()['plugins']) {
+      scribe.use(this.parseConfig()['plugins'][i]);
     }
-    scribe.use(CurlyQuotesCmd());
-    scribe.use(KeyBoardCmd());
-    scribe.use(InlineStylesCmd());
     scribe.use(Toolbar(toolbarElement));
+    this.parseConfig();
     // set initial content
     scribe.setContent(this.state.value);
     // update content
@@ -133,8 +135,8 @@ class ScribeEditor extends React.Component {
 
   render() {
     return (
-      <div>
-        <ScribeToolbar config={this.commands()} ref='toolbar' />
+      <div className='sc-container'>
+        <ScribeToolbar config={this.parseConfig()['toolbarElements']} ref='toolbar' />
         <div className='sc-editor' ref='editor' />
       </div>
     )
