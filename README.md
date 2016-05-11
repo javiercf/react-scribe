@@ -1,6 +1,8 @@
 # React wrapper for Scribe Editor
 see original [project](https://github.com/guardian/scribe)
 
+[demo](javiercf.github.io/react-scribe)
+
 usage:
 ```
 import React from 'react'
