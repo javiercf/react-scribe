@@ -5,10 +5,10 @@ var extractCSS = new ExtractTextPlugin('./dist/react-scribe.min.css');
 
 module.exports = {
   entry: [
-    './src/main.js',
+    './src/index.js',
     './src/react-scribe.scss',
   ],
-  debug: true,
+  debug: false,
 
   module: {
     loaders: [
@@ -22,6 +22,21 @@ module.exports = {
         loader: extractCSS.extract(['css','sass'])
       },
     ]
+  },
+
+  externals: {
+    'react': {
+      'commonjs': 'react',
+      'commonjs2': 'react',
+      'amd': 'react',
+      'root': 'React'
+    },
+    'react-dom': {
+      'commonjs': 'react-dom',
+      'commonjs2': 'react-dom',
+      'amd': 'react-dom',
+      'root': 'ReactDOM'
+    },
   },
 
   output: {
