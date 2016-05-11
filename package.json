@@ -1,6 +1,6 @@
 {
   "name": "react-scribe",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "The Guardian's scribe.js react component",
   "main": "src/index.js",
   "dependencies": {
@@ -53,6 +53,8 @@
   "keywords": [
     "react",
     "react component",
+    "react-component",
+    "component",
     "React",
     "editor",
     "content editor",
