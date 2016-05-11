@@ -1,19 +1,38 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { render } from 'react-dom'
 import ScribeEditor from '../src/main'
 
-const DemoApp = React.createClass({
-  handleChange: function(e) {
-    console.log('whhhhh');
-    console.log(e.target);
-  },
+const ShowCase = props => {
+  return (
+    <div>
+      { props.demoContent }
+    </div>
+    )
+};
 
-  render: function() {
+class DemoApp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: 'hello world'
+    }
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(value) {
+    this.setState({ text: value });
+  }
+
+  render() {
     return (
-      <ScribeEditor defaultValue='hellooooo' onChange={this.handleChange} />
+      <div>
+        <ScribeEditor defaultValue='hello world' onChange={this.handleChange} />
+        <ShowCase demoContent={this.state.text} />
+      </div>
     )
   }
-});
+}
 
 render(
   <DemoApp />,

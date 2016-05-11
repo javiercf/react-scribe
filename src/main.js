@@ -83,6 +83,8 @@ class ScribeEditor extends React.Component {
     super(props);
     this.commands = this.commands.bind(this);
     this.isControlled = this.isControlled.bind(this);
+    this.updateContent = this.updateContent.bind(this);
+
     this.state = {
       value: this.isControlled() ? this.props.value : this.props.defaultValue
     }
@@ -96,7 +98,7 @@ class ScribeEditor extends React.Component {
 
   commands() {
     let commands = {};
-    this.props.config.commands.forEach( function(cmd) {
+    this.props.config.commands.forEach( cmd => {
       commands[cmd] = _.get(optionMap, cmd)
     });
     return commands;
@@ -118,14 +120,22 @@ class ScribeEditor extends React.Component {
     scribe.use(KeyBoardCmd());
     scribe.use(InlineStylesCmd());
     scribe.use(Toolbar(toolbarElement));
+    // set initial content
     scribe.setContent(this.state.value);
+    // update content
+    scribe.on('content-changed', () => {
+      this.updateContent(scribe.getHTML());
+      if(this.props.onChange){
+        this.props.onChange(scribe.getHTML());
+      };
+    });
   }
 
   render() {
     return (
       <div>
         <ScribeToolbar config={this.commands()} ref='toolbar' />
-        <div className='sc-editor' ref='editor' onChange={this.props.onChange} />
+        <div className='sc-editor' ref='editor' />
       </div>
     )
   }
