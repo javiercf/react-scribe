@@ -1,9 +1,20 @@
 # React wrapper for Scribe Editor
 see original [project](https://github.com/guardian/scribe)
 
-[demo](javiercf.github.io/react-scribe)
+[demo](http://javiercf.github.io/react-scribe/)
 
-usage:
+You can include new commands following the scribe documentation and add them to the toolbar by including an object in the commands array of the following form:
+
+```
+{
+  'command': '',
+  'display': 'fa-icon',
+  'action': function(scribe){}
+}
+```
+
+### usage:
+
 ```
 import React from 'react'
 import { render } from 'react-dom'
