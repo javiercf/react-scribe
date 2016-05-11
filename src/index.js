@@ -4,7 +4,6 @@ import Scribe from 'scribe-editor'
 import Toolbar from 'scribe-plugin-toolbar'
 import _ from 'lodash'
 import optionMap from './optionMap'
-require('./react-scribe.scss');
 
 /**
  * Default Options
