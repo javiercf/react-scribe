@@ -8,10 +8,8 @@ import { render } from 'react-dom'
 import ScribeEditor from 'react-scribe'
 
 const myOptions = {
-  commands: ['blockquote', 'code', 'h1', 'h2', 'h3', 'h4', 'h5',
-      'linkPrompt', 'unlink', 'insertOrderedList', 'insertUnOrderedList',
-      'removeFormat'
-      ]
+  'commands': ['blockquote', 'code', 'h1', 'h2', 'h3', 'h4', 'h5', 'linkPrompt',
+    'unlink', 'ol', 'ul']
 };
 
 render(
@@ -19,4 +17,15 @@ render(
   document.getElementById('content')
 );
 ```
+
+Available props for the editor are:
+
+```
+config
+onChange
+value
+defaultValue
+```
+
+Be sure to include the stylesheet provided and fontawesome in your html
 

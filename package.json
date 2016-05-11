@@ -1,8 +1,8 @@
 {
   "name": "react-scribe",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "The Guardian's scribe.js react component",
-  "main": "src/main.js",
+  "main": "src/index.js",
   "dependencies": {
     "react": "^15.0.2",
     "react-dom": "^15.0.2",
@@ -31,6 +31,7 @@
     "babel-preset-react": "^6.5.0",
     "css-loader": "^0.23.1",
     "eslint": "^2.9.0",
+    "extract-text-webpack-plugin": "^1.0.1",
     "html-webpack-plugin": "^2.16.1",
     "node-sass": "^3.7.0",
     "sass-loader": "^3.2.0",

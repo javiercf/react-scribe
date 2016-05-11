@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import ScribeEditor from '../src/main'
+import ScribeEditor from '../src'
 
 const ShowCase = props => {
   return (

@@ -1,10 +1,14 @@
 var webpack = require('webpack');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+var extractCSS = new ExtractTextPlugin('./dist/react-scribe.min.css');
 
 module.exports = {
   entry: [
     './src/main.js',
+    './src/react-scribe.scss',
   ],
-  debug: false,
+  debug: true,
 
   module: {
     loaders: [
@@ -12,6 +16,10 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader?presets[]=es2015&presets[]=react'
+      },
+      {
+        test: /\.scss$/,
+        loader: extractCSS.extract(['css','sass'])
       },
     ]
   },
@@ -23,7 +31,6 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.optimize.UglifyJsPlugin(),
-    new webpack.optimize.OccurenceOrderPlugin()
+    extractCSS,
   ]
 };

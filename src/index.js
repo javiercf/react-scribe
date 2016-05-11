@@ -4,6 +4,7 @@ import Scribe from 'scribe-editor'
 import Toolbar from 'scribe-plugin-toolbar'
 import _ from 'lodash'
 import optionMap from './optionMap'
+require('./react-scribe.scss');
 
 /**
  * Default Options
@@ -62,7 +63,6 @@ class ScribeToolbar extends React.Component {
 class ScribeEditor extends React.Component {
   constructor(props) {
     super(props);
-    this.commands = this.commands.bind(this);
     this.parseConfig = this.parseConfig.bind(this);
     this.isControlled = this.isControlled.bind(this);
     this.updateContent = this.updateContent.bind(this);
@@ -74,15 +74,6 @@ class ScribeEditor extends React.Component {
 
   isControlled() {
     return 'value' in this.props;
-  }
-
-  // generate commands has based on config prop
-  commands() {
-    let commands = {};
-    this.props.config.commands.forEach( cmd => {
-      commands[cmd] = _.get(optionMap, cmd)
-    });
-    return commands;
   }
 
   parseConfig() {
@@ -104,7 +95,7 @@ class ScribeEditor extends React.Component {
         newConfig.toolbarElements[cmd.command] = cmd;
       }
     });
-    console.log(newConfig);
+
     return newConfig;
   }
 
