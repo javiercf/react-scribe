@@ -4,7 +4,8 @@ module.exports = {
   entry: [
     './src/index.js',
   ],
-  debug: false,
+
+  debug: true,
 
   module: {
     loaders: [
@@ -17,9 +18,11 @@ module.exports = {
   },
 
   output: {
-    filename: './lib/react-scribe-editor.js',
-     library: 'ScribeEditor',
-    libraryFor: 'umd'
+    path: __dirname + '/lib',
+    filename: 'react-scribe-editor.js',
+    library: 'ScribeEditor',
+    libraryTarget: 'umd',
+    umdNamedDefine: true
   },
 
   externals: {
@@ -28,7 +31,6 @@ module.exports = {
       'commonjs2': 'react',
       'amd': 'react',
       'root': 'React',
-      'var': 'React'
     },
 
     'react-dom': {
@@ -36,17 +38,11 @@ module.exports = {
       'commonjs2': 'react-dom',
       'amd': 'react-dom',
       'root': 'ReactDOM',
-      'var': 'ReactDOM'
     }
    },
 
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': '"production"'
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin(),
-    new webpack.optimize.OccurenceOrderPlugin()
-  ]
+   plugins: [
+      new webpack.optimize.UglifyJsPlugin(),
+      new webpack.optimize.OccurenceOrderPlugin()
+   ]
 };
