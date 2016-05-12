@@ -1,12 +1,8 @@
-import BlockQuoteCmd from 'scribe-plugin-blockquote-command'
-import CodeCmd from 'scribe-plugin-code-command'
-import FormatterCmd from 'scribe-plugin-formatter-html-ensure-semantic-elements'
-import PlainTextCmd from 'scribe-plugin-formatter-plain-text-convert-new-lines-to-html'
-import HeadingCmd from 'scribe-plugin-heading-command'
-import UnlinkCmd from 'scribe-plugin-intelligent-unlink-command'
-import LinkPromptCmd from 'scribe-plugin-link-prompt-command'
-import SanitizerCmd from 'scribe-plugin-sanitizer'
-import SmartListsCmd from 'scribe-plugin-smart-lists'
+import BlockQuoteCmd from 'scribe-plugin-blockquote-command';
+import CodeCmd from 'scribe-plugin-code-command';
+import HeadingCmd from 'scribe-plugin-heading-command';
+import LinkPromptCmd from 'scribe-plugin-link-prompt-command';
+import UnlinkCmd from 'scribe-plugin-intelligent-unlink-command';
 
 /**
  * Hashmap of commands
@@ -88,4 +84,4 @@ const optionMap = {
   }
 };
 
-export default optionMap
+export default optionMap;
