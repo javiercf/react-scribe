@@ -40,7 +40,7 @@
     'react/forbid-prop-types': 'error',
     'react/no-multi-comp': [ 'error', { 'ignoreStateless': true }],
     'react/no-set-state': 'off',
-    'react/no-string-refs': 'error',
+    'react/no-string-refs': 'off',
     'react/prefer-es6-class': 'error',
     'react/prefer-stateless-function': 'off',
     'react/require-extension': 'error',
