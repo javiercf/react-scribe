@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { findDOMNode } from 'react-dom';
 import optionMap from './optionMap';
 import Scribe from 'scribe-editor';
-import ScribeToolbar from './ToolBar';
+import ScribeToolbar from './ScribeToolBar';
 import Toolbar from 'scribe-plugin-toolbar';
 /**
  * Default Options

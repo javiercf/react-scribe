@@ -2,7 +2,7 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: [
-    './src/index.js',
+    './src/ScribeEditor.js',
   ],
 
   debug: true,
