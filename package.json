@@ -32,6 +32,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "css-loader": "^0.23.1",
     "eslint": "^2.9.0",
+    "eslint-plugin-react": "^5.1.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "html-webpack-plugin": "^2.16.1",
     "node-sass": "^3.7.0",
@@ -40,7 +41,7 @@
     "webpack": "^1.13.0"
   },
   "scripts": {
-    "test": "/tests/*.js",
+    "test": "eslint ./src/*.js",
     "dev": "webpack-dev-server -w --inline",
     "build": "webpack -p --config webpack.build.js"
   },
