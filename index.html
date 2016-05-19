@@ -59,6 +59,11 @@ const ShowCase = props => {
     )
 };
 
+const helloWorld = `
+<h2>React Scribe</h2>
+<p>This is a React component based on the guardian's scribe.js editor</p>
+`;
+
 const myOptions = {
   'commands': ['h2', 'blockquote', 'code', 'ol', 'ul', 'indent', 'unindent', 'linkPrompt',
     'unlink']
@@ -82,7 +87,7 @@ class DemoApp extends React.Component {
   render() {
     return (
       <div>
-        <Editor defaultValue='hello world' config={myOptions} onChange={this.handleChange} />
+        <Editor defaultValue={helloWorld} config={myOptions} onChange={this.handleChange} />
         <ShowCase demoContent={this.state.text} />
       </div>
     )
@@ -93,6 +98,16 @@ ReactDOM.render(
   <DemoApp />,
   document.getElementById('main')
 );
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43472415-5', 'auto');
+  ga('send', 'pageview');
+
 </script>
 </body>
 </html>
