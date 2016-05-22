@@ -1,6 +1,6 @@
 {
   "name": "react-scribe",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "The Guardian's scribe.js react component",
   "main": "lib/react-scribe-editor.js",
   "dependencies": {
@@ -9,17 +9,9 @@
     "scribe-editor": "^3.2.0",
     "scribe-plugin-blockquote-command": "^0.1.0",
     "scribe-plugin-code-command": "^0.1.0",
-    "scribe-plugin-curly-quotes": "^1.0.1",
-    "scribe-plugin-formatter-html-ensure-semantic-elements": "^1.0.1",
-    "scribe-plugin-formatter-plain-text-convert-new-lines-to-html": "^0.1.1",
     "scribe-plugin-heading-command": "^0.1.0",
-    "scribe-plugin-inline-styles-to-elements": "^0.1.0",
     "scribe-plugin-intelligent-unlink-command": "^0.1.6",
-    "scribe-plugin-keyboard-shortcuts": "^0.1.1",
     "scribe-plugin-link-prompt-command": "^1.0.0",
-    "scribe-plugin-noting": "^0.3.28",
-    "scribe-plugin-sanitizer": "^0.1.10",
-    "scribe-plugin-smart-lists": "^0.1.8",
     "scribe-plugin-toolbar": "^1.0.0",
     "lodash-amd": "^3.5.0",
     "lodash": "^4.0.0"

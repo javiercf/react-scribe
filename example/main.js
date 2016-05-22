@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import ScribeEditor from '../src'
+import ScribeEditor from '../src/ScribeEditor'
 
 const ShowCase = props => {
   return (
@@ -27,7 +27,7 @@ class DemoApp extends Component {
   render() {
     return (
       <div>
-        <ScribeEditor defaultValue='hello world' onChange={this.handleChange} />
+        <ScribeEditor value='hello world' onChange={this.handleChange} />
         <ShowCase demoContent={this.state.text} />
       </div>
     )

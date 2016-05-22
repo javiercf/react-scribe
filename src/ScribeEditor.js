@@ -25,7 +25,7 @@ class ScribeEditor extends Component {
     this.updateContent = this.updateContent.bind(this);
 
     this.state = {
-      value: this.isControlled() ? this.props.value : this.props.defaultValue
+      value: this.props.value
     };
   }
 
@@ -44,10 +44,19 @@ class ScribeEditor extends Component {
     // update content
     scribe.on('content-changed', () => {
       this.updateContent(scribe.getHTML());
-      if(this.props.onChange){
+      if (this.props.onChange) {
         this.props.onChange(scribe.getHTML());
       }
     });
+
+    this.scribe = scribe;
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const value = this.isControlled() ? nextProps.value : nextProps.defaultValue;
+    if (this.state.value !== value) {
+      this.scribe.setContent(value);
+    }
   }
 
   isControlled() {
