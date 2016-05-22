@@ -55,7 +55,8 @@ class ScribeEditor extends Component {
   componentWillReceiveProps(nextProps) {
     const value = this.isControlled() ? nextProps.value : nextProps.defaultValue;
     if (this.state.value !== value) {
-      this.scribe.setContent(value);
+      this.updateContent(value);
+      this.scribe.setHTML(value);
     }
   }
 
