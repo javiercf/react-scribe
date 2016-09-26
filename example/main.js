@@ -28,7 +28,7 @@ class DemoApp extends Component {
   render() {
     return (
       <div>
-        <ScribeEditor onChange={ this.handleChange } />
+        <ScribeEditor onChange={ this.handleChange } value='hello' />
         <ShowCase demoContent={ this.state.text } />
       </div>
     )

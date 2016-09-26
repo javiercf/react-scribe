@@ -40,7 +40,6 @@ class ScribeEditor extends Component {
     scribe.use(Toolbar(toolbarElement));
     this.parseConfig();
     // set initial content
-    console.log(this.state.value);
     scribe.setContent(this.state.value);
     // update content
     scribe.on('content-changed', () => {
@@ -56,8 +55,9 @@ class ScribeEditor extends Component {
   componentWillReceiveProps(nextProps) {
     const value = this.isControlled() ? nextProps.value
       : nextProps.defaultValue;
-    if (this.state.value !== value) {
+    if (this.props.value !== value) {
       this.updateContent(value);
+      this.scribe.setHTML(value);
     }
   }
 
