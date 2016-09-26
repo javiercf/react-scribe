@@ -25,21 +25,22 @@ class ScribeEditor extends Component {
     this.updateContent = this.updateContent.bind(this);
 
     this.state = {
-      value: this.props.value
+      value: this.props.value || ''
     };
   }
 
   // Bind scribe to Component and include Toolbar commands and options
   componentDidMount() {
-    const editor = findDOMNode(this.refs.editor);
-    const scribe = new Scribe(editor);
-    const toolbarElement = findDOMNode(this.refs.toolbar);
+    const editor = findDOMNode(this._editor),
+      scribe = new Scribe(editor),
+      toolbarElement = findDOMNode(this.toolbarElement);
     for (const i in this.parseConfig()['plugins']) {
       scribe.use(this.parseConfig()['plugins'][i]);
     }
     scribe.use(Toolbar(toolbarElement));
     this.parseConfig();
     // set initial content
+    console.log(this.state.value);
     scribe.setContent(this.state.value);
     // update content
     scribe.on('content-changed', () => {
@@ -53,10 +54,10 @@ class ScribeEditor extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const value = this.isControlled() ? nextProps.value : nextProps.defaultValue;
+    const value = this.isControlled() ? nextProps.value
+      : nextProps.defaultValue;
     if (this.state.value !== value) {
       this.updateContent(value);
-      this.scribe.setHTML(value);
     }
   }
 
@@ -65,11 +66,11 @@ class ScribeEditor extends Component {
   }
 
   parseConfig() {
-    const config = this.props.config;
-    const newConfig = {
-      'toolbarElements': {},
-      'plugins': []
-    };
+    const config = this.props.config,
+      newConfig = {
+        'toolbarElements': {},
+        'plugins': []
+      };
     config.forEach( cmd => {
       const command = _.get(optionMap, cmd);
       if (command) {
@@ -95,10 +96,10 @@ class ScribeEditor extends Component {
   render() {
     return (
       <div className='sc-container'>
-        <ScribeToolbar config={ this.parseConfig()['toolbarElements'] }
-          ref='toolbar'
-        />
-        <div className='sc-editor' ref='editor' />
+        <div ref={ c => this.toolbarElement = c }>
+          <ScribeToolbar config={ this.parseConfig()['toolbarElements'] } />
+        </div>
+        <div className='sc-editor' ref={ c => this._editor = c } />
       </div>
     );
   }

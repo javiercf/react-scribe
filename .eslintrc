@@ -49,6 +49,7 @@
     'react/sort-comp': 'error',
     'react/sort-prop-types': 'error',
     'react/wrap-multilines': 'error',
+    'react/no-find-dom-node': 'error',
 
     // JSX
     'react/jsx-boolean-value': 'error',

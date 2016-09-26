@@ -1,13 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 import ScribeEditor from '../src/ScribeEditor'
 
-const ShowCase = props => {
-  return (
-    <div className='sc-showCase'>
-      { props.demoContent }
-    </div>
-    )
+const ShowCase = props =>
+  <div className='sc-showCase'>
+    { props.demoContent }
+  </div>;
+
+ShowCase.propTypes = {
+  demoContent: PropTypes.string
 };
 
 class DemoApp extends Component {
@@ -16,19 +17,19 @@ class DemoApp extends Component {
     this.state = {
       text: 'hello world'
     }
-
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(value) {
-    this.setState({ text: value });
+    const newState = Object.assign({}, this.state, { text: value });
+    this.setState(newState);
   }
 
   render() {
     return (
       <div>
-        <ScribeEditor value='hello world' onChange={this.handleChange} />
-        <ShowCase demoContent={this.state.text} />
+        <ScribeEditor onChange={ this.handleChange } />
+        <ShowCase demoContent={ this.state.text } />
       </div>
     )
   }
