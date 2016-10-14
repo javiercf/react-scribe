@@ -26,6 +26,15 @@ const ScribeToolbar = props => {
         <i className='fa fa-underline' />
       </button>
       { toolBarOptions }
+      <button data-command-name='justifyCenter'>
+        <i className='fa fa-align-center' />
+      </button>
+      <button data-command-name='justifyLeft'>
+        <i className='fa fa-align-left' />
+      </button>
+      <button data-command-name='justifyRight'>
+        <i className='fa fa-align-right' />
+      </button>
       <button data-command-name='undo'>
         <i className='fa fa-undo' />
       </button>

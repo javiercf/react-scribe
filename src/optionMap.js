@@ -49,6 +49,40 @@ const optionMap = {
     'action': LinkPromptCmd(),
     'display': 'fa-link'
   },
+  'small': {
+    'command': 'small',
+    'action': scribe => {
+      const fontCommand = new scribe.api.Command('fontSize');
+
+      fontCommand.execute = function () {
+        let newEl;
+        if (!this.queryState()) {
+          scribe.api.Command.prototype.execute.call(this, 3);
+          const text = document.querySelector('font'),
+            newEl = document.createElement('small');
+          newEl.appendChild(document.createTextNode(text.innerText));
+          text.parentNode.replaceChild(newEl, text);
+        } else {
+          scribe.api.Command.prototype.execute.call(this, 4);
+          const text = document.querySelector('font');
+          text.parentNode.parentNode.replaceChild(
+            document.createTextNode(text.innerText),
+            text.parentNode
+          );
+        }
+      };
+
+      fontCommand.queryState = function () {
+        const selection = new scribe.api.Selection();
+        return !! selection.getContaining(node => node.nodeName === 'SMALL');
+      };
+
+      fontCommand.queryEnabled = () => true;
+
+      scribe.commands.small = fontCommand;
+    },
+    'display': 'fa-text-height'
+  },
   'unlink': {
     'command': 'unlink',
     'action': UnlinkCmd(),
