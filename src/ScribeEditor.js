@@ -1,7 +1,8 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
 import _ from 'lodash';
 import { findDOMNode } from 'react-dom';
 import optionMap from './optionMap';
+import PropTypes from 'prop-types';
 import Scribe from 'scribe-editor';
 import ScribeToolbar from './ScribeToolBar';
 import Toolbar from 'scribe-plugin-toolbar';
@@ -11,13 +12,13 @@ import Toolbar from 'scribe-plugin-toolbar';
  */
 
 const defaultOptions = ['blockquote', 'code', 'h2', 'linkPrompt',
-    'unlink', 'ol', 'ul'];
+  'unlink', 'ol', 'ul'];
 
 /**
  * Main editor component
  */
 
-class ScribeEditor extends Component {
+class ScribeEditor extends PureComponent {
   constructor(props) {
     super(props);
     this.parseConfig = this.parseConfig.bind(this);

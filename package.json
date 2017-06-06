@@ -4,6 +4,9 @@
   "description": "The Guardian's scribe.js react component",
   "main": "lib/react-scribe-editor.js",
   "dependencies": {
+    "lodash": "^4.0.0",
+    "lodash-amd": "^3.5.0",
+    "prop-types": "^15.5.10",
     "react": "^15.0.2",
     "react-dom": "^15.0.2",
     "scribe-editor": "^3.2.0",
@@ -12,9 +15,7 @@
     "scribe-plugin-heading-command": "^0.1.0",
     "scribe-plugin-intelligent-unlink-command": "^0.1.6",
     "scribe-plugin-link-prompt-command": "^1.0.0",
-    "scribe-plugin-toolbar": "^1.0.0",
-    "lodash-amd": "^3.5.0",
-    "lodash": "^4.0.0"
+    "scribe-plugin-toolbar": "^1.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.8.0",
